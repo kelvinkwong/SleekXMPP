@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
     # Setup logging.
     logging.basicConfig(level=opts.loglevel,
-                        format='%(levelname)-8s %(message)s')
+                        format='%(filename)-14s +%(lineno)-5s %(levelname)-5s %(message)s')
 
     if opts.jid is None or opts.password is None:
         logging.critical('username or password is empty')
