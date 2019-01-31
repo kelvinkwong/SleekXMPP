@@ -470,7 +470,10 @@ class XMLStream(object):
                     ctx.check_hostname = False
                     ctx.verify_mode = ssl.CERT_NONE
                 elif cert_policy == ssl.CERT_REQUIRED:
-                    ctx.load_verify_locations(cafile=self.ca_certs)
+                    if self.ca_certs:
+                        ctx.load_verify_locations(cafile=self.ca_certs)
+                    if self.certfile and self.keyfile:
+                        ctx.load_cert_chain(self.certfile, self.keyfile)
             else:
                 # Oops, create_default_context() is not supported.
                 if self.ssl_version == ssl.PROTOCOL_SSLv3:
