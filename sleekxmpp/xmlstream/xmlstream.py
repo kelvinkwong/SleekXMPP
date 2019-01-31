@@ -517,7 +517,7 @@ class XMLStream(object):
         if ctx:
             if self.ciphers:
                 ctx.set_ciphers(self.ciphers)
-            return ctx.wrap_socket(self.socket, do_handshake_on_connect=False)
+            return ctx.wrap_socket(self.socket, do_handshake_on_connect=False, server_hostname=self._expected_server_name)
         else:
             if self.ciphers and sys.version_info >= (2, 7):
                 ssl_args['ciphers'] = self.ciphers
