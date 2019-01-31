@@ -101,9 +101,9 @@ if __name__ == '__main__':
 
     # JID and password options.
     optp.add_option("-j", "--jid", dest="jid",
-                    help="JID to use")
+                    help="--jid client@localhost # username to login")
     optp.add_option("-p", "--password", dest="password",
-                    help="password to use")
+                    help="--password password # password for this jid")
 
     opts, args = optp.parse_args()
 
@@ -111,10 +111,10 @@ if __name__ == '__main__':
     logging.basicConfig(level=opts.loglevel,
                         format='%(levelname)-8s %(message)s')
 
-    if opts.jid is None:
-        opts.jid = raw_input("Username: ")
-    if opts.password is None:
-        opts.password = getpass.getpass("Password: ")
+    if opts.jid is None or opts.password is None:
+        logging.critical('username or password is empty')
+        logging.info(sys.argv[0] + ' -j client@localhost' + ' -p password' + ' -d')
+        exit(117)
 
     # Setup the EchoBot and register plugins. Note that while plugins may
     # have interdependencies, the order in which you register them does
