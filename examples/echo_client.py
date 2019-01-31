@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -143,9 +143,9 @@ if __name__ == '__main__':
     # xmpp.ssl_version = ssl.PROTOCOL_SSLv3
 
     # If you want to verify the SSL certificates offered by a server:
-    xmpp.ca_certs = "root-ca.pem"
-    xmpp.certfile = "client.pem"
-    xmpp.keyfile  = "client.key"
+    xmpp.ca_certs = "certs/root-ca.pem"
+    xmpp.certfile = "certs/client.pem"
+    xmpp.keyfile  = "certs/client.key"
 
     # Connect to the XMPP server and start processing XMPP stanzas.
     # if xmpp.connect(('127.0.0.1', 5222)):
