@@ -15,6 +15,9 @@ import getpass
 from optparse import OptionParser
 
 import sleekxmpp
+if sleekxmpp.__version_info__ < (1, 4, 0, '', 0):
+    print('Expecting sleekxmpp version 1.4.0')
+    exit(1)
 
 # Python versions before 3.0 do not use UTF-8 encoding
 # by default. To ensure that Unicode is handled properly
