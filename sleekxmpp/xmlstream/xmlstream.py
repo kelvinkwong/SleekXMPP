@@ -548,6 +548,9 @@ class XMLStream(object):
         self.stop.clear()
 
         if host and port:
+            if isinstance(host, type('string')):
+                logging.warning('Using socket to get IP address from Hostname instead of using a DNS')
+                host = Socket.gethostbyname(host)
             self.address = (host, int(port))
         try:
             Socket.inet_aton(self.address[0])
