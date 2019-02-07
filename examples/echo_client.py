@@ -144,11 +144,11 @@ if __name__ == '__main__':
 
     # If you want to verify the SSL certificates offered by a server:
     xmpp.ca_certs = "certs/root-ca.pem"
-    xmpp.certfile = "certs/client.pem"
-    xmpp.keyfile  = "certs/client.key"
+    # If you want to connect via C2S with SSL:
+    # Use SleekXMPP/examples/echo_client_ssl.py
 
     # Connect to the XMPP server and start processing XMPP stanzas.
-    # if xmpp.connect(('127.0.0.1', 5222)):
+    #if xmpp.connect(('127.0.0.1', 5222)):
     if xmpp.connect((xmpp._expected_server_name, 5222)):
         # If you do not have the dnspython library installed, you will need
         # to manually specify the name of the server if it does not match
