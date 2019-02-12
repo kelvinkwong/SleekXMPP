@@ -9,6 +9,7 @@
     See the file LICENSE for copying permission.
 """
 
+import os
 import sys
 import logging
 import getpass
@@ -143,9 +144,21 @@ if __name__ == '__main__':
     # xmpp.ssl_version = ssl.PROTOCOL_SSLv3
 
     # If you want to verify the SSL certificates offered by a server:
-    xmpp.ca_certs = "certs/root-ca.pem"
-    xmpp.certfile = "certs/client.pem"
-    xmpp.keyfile  = "certs/client.key"
+    CERT_DIR='cert'
+    xmpp.ca_certs = CERT_DIR + "/ca/root_ca.pem"
+    xmpp.certfile = CERT_DIR + "/certs/client.pem"
+    xmpp.keyfile  = CERT_DIR + "/certs/client.key"
+
+    if os.path.isdir(CERT_DIR):
+        if not os.path.isfile(xmpp.ca_certs):
+            logging.error('CA Certificate not found at %s' % xmpp.ca_certs)
+        if not os.path.isfile(xmpp.certfile):
+            logging.error('Client Certificate not found at %s' % xmpp.certfile)
+        if not os.path.isfile(xmpp.keyfile):
+            logging.error('Client Key not found at %s' % xmpp.ca_certs)
+    else:
+        logging.critical('Certificate Directory not found at %s' % os.getcwd())
+        exit()
 
     # Connect to the XMPP server and start processing XMPP stanzas.
     #if xmpp.connect(('127.0.0.1', 5222)):
