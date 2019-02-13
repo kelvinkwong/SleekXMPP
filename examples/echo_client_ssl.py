@@ -112,10 +112,13 @@ if __name__ == '__main__':
     logging.basicConfig(level=opts.loglevel,
                         format='%(filename)-14s +%(lineno)-5s %(levelname)-5s %(message)s')
 
-    if opts.jid is None or opts.password is None:
-        logging.critical('username or password is empty')
+    if opts.jid is None:
+        if opts.password is None:
+            logging.warning('password is empty')
+    else:
+        logging.critical('username is empty')
         logging.info(sys.argv[0] + ' -j client@localhost' + ' -p password' + ' -d')
-        exit(117)
+        exit()
 
     # Setup the EchoBot and register plugins. Note that while plugins may
     # have interdependencies, the order in which you register them does
