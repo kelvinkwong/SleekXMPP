@@ -113,12 +113,12 @@ if __name__ == '__main__':
                         format='%(filename)-14s +%(lineno)-5s %(levelname)-5s %(message)s')
 
     if opts.jid is None:
+        logging.critical('username@hostname is empty')
+        logging.info(sys.argv[0] + ' -d' + ' -j client@localhost' + ' -p password')
+        exit()
+    else:
         if opts.password is None:
             logging.warning('password is empty')
-    else:
-        logging.critical('username is empty')
-        logging.info(sys.argv[0] + ' -j client@localhost' + ' -p password' + ' -d')
-        exit()
 
     # Setup the EchoBot and register plugins. Note that while plugins may
     # have interdependencies, the order in which you register them does
@@ -154,7 +154,8 @@ if __name__ == '__main__':
 
     if os.path.isdir(CERT_DIR):
         if not os.path.isfile(xmpp.ca_certs):
-            logging.error('CA Certificate not found at %s' % xmpp.ca_certs)
+            logging.critical('CA Certificate not found at %s' % xmpp.ca_certs)
+            exit()
         if not os.path.isfile(xmpp.certfile):
             logging.error('Client Certificate not found at %s' % xmpp.certfile)
         if not os.path.isfile(xmpp.keyfile):
