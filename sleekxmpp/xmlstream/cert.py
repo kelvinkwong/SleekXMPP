@@ -65,7 +65,9 @@ def extract_names(raw_cert):
     extensions = tbs.getComponentByName('extensions') or []
 
     # Extract the CommonName(s) from the cert.
-    for rdnss in subject:
+    # for rdnss in subject:
+    if subject:
+        rdnss = subject[0]
         for rdns in rdnss:
             for name in rdns:
                 oid = name.getComponentByName('type')
